@@ -14,7 +14,6 @@ import androidx.navigation.compose.rememberNavController
 
 @Composable
 fun MainApp(
-    apolloClient: ApolloClient,
 ) {
     val navController = rememberNavController()
     SampleTheme() {
@@ -25,7 +24,7 @@ fun MainApp(
                 modifier = Modifier.fillMaxSize().padding(innerPadding),
                 color = MaterialTheme.colors.background
             ) {
-                NavigationGraph(navController, apolloClient)
+                NavigationGraph(navController)
             }
         }
     }

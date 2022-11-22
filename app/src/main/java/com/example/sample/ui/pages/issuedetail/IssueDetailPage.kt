@@ -10,7 +10,6 @@ import com.apollographql.apollo3.ApolloClient
 fun IssueDetailPage(
     id: String,
     navController: NavController,
-    apolloClient: ApolloClient
 ){
     Column(){
         Text("IssueDetailPage")

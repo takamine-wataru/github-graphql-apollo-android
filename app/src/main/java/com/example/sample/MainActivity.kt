@@ -17,10 +17,9 @@ import com.example.sample.ui.theme.SampleTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val apolloClient = ApolloClientFactory.create()
         setContent {
             SampleTheme {
-                MainApp(apolloClient)
+                MainApp()
             }
         }
     }

@@ -12,7 +12,6 @@ import com.example.sample.ui.pages.myissuelist.MyIssueListPage
 @Composable
 fun NavigationGraph(
     navController: NavHostController,
-    apolloClient: ApolloClient
 ) {
     NavHost(
         navController = navController,
@@ -28,7 +27,6 @@ fun NavigationGraph(
             ) {
                 IssueListPage(
                     navController = navController,
-                    apolloClient = apolloClient,
                 )
             }
             composable(
@@ -45,7 +43,6 @@ fun NavigationGraph(
                 IssueDetailPage(
                     id = id,
                     navController = navController,
-                    apolloClient = apolloClient,
                 )
             }
         }
@@ -58,7 +55,6 @@ fun NavigationGraph(
             ) {
                 MyIssueListPage(
                     navController = navController,
-                    apolloClient = apolloClient,
                 )
             }
         }

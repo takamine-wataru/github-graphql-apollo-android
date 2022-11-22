@@ -22,7 +22,7 @@ class IssueRepositoryImpl(
         val issueList = requireNotNull(response.data?.repository?.issues?.nodes)
         return issueList.mapNotNull { issue ->
             issue?.issueFragment?.let {
-                IssueConverter.convert(issue.issueFragment)
+                IssueConverter.convert(it)
             }
 
         }
@@ -39,7 +39,7 @@ class IssueRepositoryImpl(
 
         return issueList.mapNotNull { issue ->
             issue?.issueFragment?.let {
-                IssueConverter.convert(issue.issueFragment)
+                IssueConverter.convert(it)
             }
 
         }

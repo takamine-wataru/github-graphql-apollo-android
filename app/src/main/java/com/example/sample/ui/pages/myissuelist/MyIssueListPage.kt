@@ -9,7 +9,6 @@ import com.apollographql.apollo3.ApolloClient
 @Composable
 fun MyIssueListPage(
     navController: NavController,
-    apolloClient: ApolloClient
 ){
     Column(){
         Text("MyIssueListPage")
