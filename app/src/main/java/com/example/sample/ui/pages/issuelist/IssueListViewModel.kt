@@ -3,8 +3,8 @@ package com.example.sample.ui.pages.issuelist
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.sample.domain.repository.IssueRepository
-import com.example.sample.ui.components.bindingmodel.IssueBindingConverter
-import com.example.sample.ui.components.bindingmodel.IssueBindingModel
+import com.example.sample.ui.common.bindingmodel.IssueBindingConverter
+import com.example.sample.ui.common.bindingmodel.IssueBindingModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 

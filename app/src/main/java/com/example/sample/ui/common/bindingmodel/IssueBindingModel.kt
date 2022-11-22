@@ -1,4 +1,4 @@
-package com.example.sample.ui.components.bindingmodel
+package com.example.sample.ui.common.bindingmodel
 
 
 data class IssueBindingModel(

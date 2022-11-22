@@ -14,9 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.apollographql.apollo3.ApolloClient
-import com.example.sample.ui.components.IssueBlock
-import com.example.sample.ui.pages.issuelist.IssueListViewModel
+import com.example.sample.ui.common.IssueItemBlock
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -41,7 +39,7 @@ internal fun MyIssueListPage(
                 Text("IssueListPage", fontWeight = FontWeight.Bold)
                 Spacer(Modifier.height(24.dp))
                 issueList.forEach { issue ->
-                    IssueBlock(issue)
+                    IssueItemBlock(issue, {})
                     Spacer(Modifier.height(24.dp))
                 }
             }
