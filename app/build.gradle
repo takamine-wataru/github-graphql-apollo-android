@@ -26,7 +26,17 @@ android {
         properties.load(project.rootProject.file('local.properties').newDataInputStream())
         // local.propertiesのapi_keyに定義されている値を読み込む
         def GITHUB_PERSONAL_ACCESS_TOKEN = properties.getProperty("github_personal_access_token")
+        def REPOSITORY_OWNER = properties.getProperty("repository_owner")
+        def REPOSITORY_NAME = properties.getProperty("repository_name")
+        def ASSIGNEE_ID = properties.getProperty("assignee_id")
+        def ASSIGNEE_NAME = properties.getProperty("assignee_name")
+
         buildConfigField("String", "GITHUB_PERSONAL_ACCESS_TOKEN", "${GITHUB_PERSONAL_ACCESS_TOKEN}")
+        buildConfigField("String", "REPOSITORY_OWNER", "${REPOSITORY_OWNER}")
+        buildConfigField("String", "REPOSITORY_NAME", "${REPOSITORY_NAME}")
+        buildConfigField("String", "ASSIGNEE_ID", "${ASSIGNEE_ID}")
+        buildConfigField("String", "ASSIGNEE_NAME", "${ASSIGNEE_NAME}")
+
     }
 
     buildTypes {

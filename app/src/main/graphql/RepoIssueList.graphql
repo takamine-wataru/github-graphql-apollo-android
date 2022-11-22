@@ -1,0 +1,16 @@
+query RepoIssueList (
+    $owner: String!
+    $name: String!,
+) {
+    repository(
+        owner: $owner,
+        name: $name,
+    ) {
+        id
+        issues(first: 30) {
+            nodes {
+                ...IssueFragment
+            }
+        }
+    }
+}

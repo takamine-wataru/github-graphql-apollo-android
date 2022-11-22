@@ -1,0 +1,19 @@
+mutation AddAssigneeRepoIssue(
+    $issueId: ID!,
+    $assigneeId: ID!
+) {
+    addAssigneesToAssignable(
+        input: {
+            assignableId: $issueId,
+            assigneeIds: [$assigneeId],
+        }
+    ) {
+        assignable {
+            assignees(first: 10) {
+                nodes {
+                    ...AssigneeFragment
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,4 @@
+fragment AssigneeFragment on User {
+    id
+    name
+}

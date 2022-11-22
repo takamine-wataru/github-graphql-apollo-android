@@ -1,0 +1,10 @@
+fragment IssueFragment on Issue {
+    id
+    number
+    title
+    assignees(first: 10) {
+        nodes {
+            ...AssigneeFragment
+        }
+    }
+}

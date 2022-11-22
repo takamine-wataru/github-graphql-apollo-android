@@ -1,0 +1,17 @@
+query RepoAssignIssueList (
+    $owner: String!
+    $name: String!,
+    $assignee: String!,
+) {
+    repository(
+        owner: $owner
+        name: $name,
+    ) {
+        id
+        issues(first: 30, filterBy: {assignee: $assignee}) {
+            nodes {
+                ...IssueFragment
+            }
+        }
+    }
+}
