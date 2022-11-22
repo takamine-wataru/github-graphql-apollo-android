@@ -28,21 +28,22 @@ internal fun IssueListPage(
 
     val scrollableState = rememberScrollState()
     Surface(modifier = Modifier.fillMaxSize()) {
-        Column(
-            modifier = Modifier
-                .padding(horizontal = 16.dp, vertical = 24.dp)
-                .verticalScroll(scrollableState)
-        ){
-            Text("IssueListPage", fontWeight = FontWeight.Bold)
-            Spacer(Modifier.height(24.dp))
-            issueList.forEach { issue ->
-                IssueBlock(issue)
-                Spacer(Modifier.height(24.dp))
-            }
-        }
         if(issueList.isEmpty()) {
             Box(contentAlignment = Alignment.Center) {
                 CircularProgressIndicator()
+            }
+        } else {
+            Column(
+                modifier = Modifier
+                    .padding(horizontal = 16.dp, vertical = 24.dp)
+                    .verticalScroll(scrollableState)
+            ) {
+                Text("IssueListPage", fontWeight = FontWeight.Bold)
+                Spacer(Modifier.height(24.dp))
+                issueList.forEach { issue ->
+                    IssueBlock(issue)
+                    Spacer(Modifier.height(24.dp))
+                }
             }
         }
     }

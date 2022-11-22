@@ -8,7 +8,7 @@ interface IssueRepository {
 
     suspend fun fetchRepoIssueList(): List<Issue>
 
-    suspend fun fetchRepoAssignIssueList(assignee: String): List<Issue>
+    suspend fun fetchRepoAssignIssueList(): List<Issue>
 
     suspend fun fetchRepoIssue(number: Int): Issue
 

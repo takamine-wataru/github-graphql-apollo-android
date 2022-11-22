@@ -18,4 +18,28 @@ internal object IssueConverter {
             }
         )
     }
+
+    fun convert(
+        fragment: IssueFragment,
+        assigneeName: String
+    ): Issue? {
+        val isAssign = fragment.assignees.nodes?.let { node ->
+            val tmp = node.filter { it?.assigneeFragment?.name != assigneeName }
+            tmp.isNotEmpty()
+        } ?: false
+        if(!isAssign) return null
+
+        return Issue(
+            id = fragment.id,
+            number = fragment.number,
+            title = fragment.title,
+            assignee = fragment.assignees.nodes?.firstOrNull()?.assigneeFragment?.let { assignee ->
+                Assignee(
+                    id = assignee.id,
+                    name = assignee.name
+                )
+            }
+        )
+
+    }
 }

@@ -28,21 +28,20 @@ class IssueRepositoryImpl(
         }
     }
 
-    override suspend fun fetchRepoAssignIssueList(assignee: String): List<Issue> {
+    // FIXME: graphqlのクエリ上でfilterが効かなかったので、repository層でfilteringする
+    override suspend fun fetchRepoAssignIssueList(): List<Issue> {
         val query = RepoAssignIssueListQuery(
             owner = BuildConfig.REPOSITORY_OWNER,
             name = BuildConfig.REPOSITORY_NAME,
             assignee = BuildConfig.ASSIGNEE_NAME
         )
         val response = apolloClient.query(query).execute()
-        val issueList = requireNotNull(response.data?.repository?.issues?.nodes)
 
-        return issueList.mapNotNull { issue ->
+        return response.data?.repository?.issues?.nodes?.mapNotNull { issue ->
             issue?.issueFragment?.let {
-                IssueConverter.convert(it)
+                IssueConverter.convert(it, BuildConfig.ASSIGNEE_NAME)
             }
-
-        }
+        } ?: emptyList()
     }
 
     override suspend fun fetchRepoIssue(number: Int): Issue {

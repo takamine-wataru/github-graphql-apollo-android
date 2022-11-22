@@ -8,7 +8,10 @@ query RepoAssignIssueList (
         name: $name,
     ) {
         id
-        issues(first: 30, filterBy: {assignee: $assignee}) {
+        issues(
+            first: 30,
+#            filterBy: {assignee: "$assignee"} // うまく効かないのでコメントアウト
+        ) {
             nodes {
                 ...IssueFragment
             }

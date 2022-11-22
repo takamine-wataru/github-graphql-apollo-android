@@ -24,10 +24,12 @@ fun BottomNavigation(navController: NavController) {
         val currentRoute = navBackStackEntry?.destination?.route
         items.forEach { item ->
             BottomNavigationItem(
-                icon = { Icon(item.icon, contentDescription = null, modifier = Modifier, tint = Color.White) },
-                label = { Text(item.title, color = Color.White) },
-                selected = currentRoute == item.route,
-                onClick = { navController.navigate(item.route)}
+                icon = { Icon(item.icon, contentDescription = null) },
+                label = { Text(item.title) },
+                selected = currentRoute?.let { it.split("/")[0]} == item.route,
+                onClick = { navController.navigate(item.route)},
+                unselectedContentColor = Color.Gray,
+
             )
         }
     }
