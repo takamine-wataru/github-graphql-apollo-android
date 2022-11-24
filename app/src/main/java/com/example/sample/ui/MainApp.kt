@@ -1,5 +1,6 @@
 package com.example.sample.ui
 
+import androidx.activity.OnBackPressedDispatcher
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
@@ -14,7 +15,8 @@ import androidx.navigation.compose.rememberNavController
 
 @Composable
 fun MainApp(
-) {
+    onBackPressedDispatcher: OnBackPressedDispatcher,
+    ) {
     val navController = rememberNavController()
     SampleTheme() {
         Scaffold(

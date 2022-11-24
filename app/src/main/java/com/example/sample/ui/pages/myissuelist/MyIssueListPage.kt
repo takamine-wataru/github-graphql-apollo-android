@@ -36,7 +36,7 @@ internal fun MyIssueListPage(
                     .padding(horizontal = 16.dp, vertical = 24.dp)
                     .verticalScroll(scrollableState)
             ) {
-                Text("IssueListPage", fontWeight = FontWeight.Bold)
+                Text("MyIssueListPage", fontWeight = FontWeight.Bold)
                 Spacer(Modifier.height(24.dp))
                 issueList.forEach { issue ->
                     IssueItemBlock(issue, {})

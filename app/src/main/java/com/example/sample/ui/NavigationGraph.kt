@@ -30,18 +30,18 @@ fun NavigationGraph(
                 )
             }
             composable(
-                route = "${BottomNavItem.Issue.route}/issuedetail?id={id}",
+                route = "${BottomNavItem.Issue.route}/issuedetail?issueNumber={issueNumber}",
                 arguments = listOf(
                     navArgument(
-                        name = "id"
+                        name = "issueNumber"
                     ) {
-                        type = NavType.StringType
+                        type = NavType.IntType
                     }
                 ),
             ) { backStackEntry ->
-                val id = requireNotNull(backStackEntry.arguments?.getString("id"))
+                val issueNumber = requireNotNull(backStackEntry.arguments?.getInt("issueNumber"))
                 IssueDetailPage(
-                    id = id,
+                    issueNumber = issueNumber,
                     navController = navController,
                 )
             }

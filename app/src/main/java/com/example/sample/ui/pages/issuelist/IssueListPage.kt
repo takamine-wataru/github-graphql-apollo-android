@@ -30,8 +30,8 @@ internal fun IssueListPage(
     val navigation by itemViewModel.navigationStateFlow.collectAsState()
 
     LaunchedEffect(navigation) {
-        navigation?.let { issueId ->
-            navController.navigate("${BottomNavItem.Issue.route}/issuedetail?id=${issueId}")
+        navigation?.let { issueNumber ->
+            navController.navigate("${BottomNavItem.Issue.route}/issuedetail?issueNumber=${issueNumber}")
         }
     }
 

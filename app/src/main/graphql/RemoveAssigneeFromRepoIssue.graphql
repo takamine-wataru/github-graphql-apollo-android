@@ -1,0 +1,19 @@
+mutation RemoveAssigneesFromRepoIssue(
+    $issueId: ID!,
+    $assigneeId: ID!
+) {
+    removeAssigneesFromAssignable(
+        input: {
+            assignableId: $issueId,
+            assigneeIds: [$assigneeId],
+        }
+    ) {
+        assignable {
+            assignees(first: 10) {
+                nodes {
+                    ...AssigneeFragment
+                }
+            }
+        }
+    }
+}

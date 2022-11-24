@@ -19,7 +19,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             SampleTheme {
-                MainApp()
+                MainApp(
+                    this.onBackPressedDispatcher,
+                    )
             }
         }
     }

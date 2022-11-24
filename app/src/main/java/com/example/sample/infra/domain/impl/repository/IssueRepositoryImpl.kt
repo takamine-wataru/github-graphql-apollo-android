@@ -9,17 +9,34 @@ import com.example.sample.domain.repository.IssueRepository
 class IssueRepositoryImpl(
     private val apolloClient: ApolloClient
 ): IssueRepository {
-    override suspend fun addAssigneeToRepoIssue(issueId: Int, assigneeId: String) {
-        val mutation = AddAssigneeRepoIssueMutation(issueId.toString(), assigneeId)
-        val response = apolloClient.mutation(mutation).execute()
+    override suspend fun addAssigneeToRepoIssue(issueId: String, assigneeId: String): Assignee? {
+        val mutation = AddAssigneeRepoIssueMutation(issueId,  assigneeId)
+        val response = apolloClient.mutation(mutation).execute().dataAssertNoErrors
+
+        return response.addAssigneesToAssignable?.assignable?.assignees?.nodes?.firstOrNull()?.assigneeFragment.let { fragment ->
+            fragment?.let {
+                AssigneeConverter.convert(it)
+            }
+        }
+    }
+
+    override suspend fun removeAssigneeFromRepoIssue(issueId: String, assigneeId: String): Assignee? {
+        val mutation = RemoveAssigneesFromRepoIssueMutation(issueId, assigneeId)
+        val response = apolloClient.mutation(mutation).execute().dataAssertNoErrors
+
+        return response.removeAssigneesFromAssignable?.assignable?.assignees?.nodes?.firstOrNull()?.assigneeFragment.let { fragment ->
+            fragment?.let {
+                AssigneeConverter.convert(it)
+            }
+        }
     }
     override suspend fun fetchRepoIssueList(): List<Issue> {
         val query = RepoIssueListQuery(
             owner = BuildConfig.REPOSITORY_OWNER,
             name = BuildConfig.REPOSITORY_NAME
         )
-        val response = apolloClient.query(query).execute()
-        val issueList = requireNotNull(response.data?.repository?.issues?.nodes)
+        val response = apolloClient.query(query).execute().dataAssertNoErrors
+        val issueList = requireNotNull(response.repository?.issues?.nodes)
         return issueList.mapNotNull { issue ->
             issue?.issueFragment?.let {
                 IssueConverter.convert(it)
@@ -35,9 +52,9 @@ class IssueRepositoryImpl(
             name = BuildConfig.REPOSITORY_NAME,
             assignee = BuildConfig.ASSIGNEE_NAME
         )
-        val response = apolloClient.query(query).execute()
+        val response = apolloClient.query(query).execute().dataAssertNoErrors
 
-        return response.data?.repository?.issues?.nodes?.mapNotNull { issue ->
+        return response.repository?.issues?.nodes?.mapNotNull { issue ->
             issue?.issueFragment?.let {
                 IssueConverter.convert(it, BuildConfig.ASSIGNEE_NAME)
             }
@@ -50,8 +67,8 @@ class IssueRepositoryImpl(
             name = BuildConfig.REPOSITORY_NAME,
             number = number
         )
-        val response = apolloClient.query(query).execute()
-        val issueFragment = requireNotNull(response.data?.repository?.issue?.issueFragment)
+        val response = apolloClient.query(query).execute().dataAssertNoErrors
+        val issueFragment = requireNotNull(response.repository?.issue?.issueFragment)
 
         return IssueConverter.convert(issueFragment)
     }

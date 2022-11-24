@@ -6,10 +6,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 
 internal class IssueItemViewModel: ViewModel() {
 
-    private val _navigationStateFlow = MutableStateFlow<String?>(null)
+    private val _navigationStateFlow = MutableStateFlow<Int?>(null)
     val navigationStateFlow = _navigationStateFlow
 
     fun onClickIssue(bindingModel: IssueBindingModel) {
-        navigationStateFlow.value = bindingModel.id
+        navigationStateFlow.value = bindingModel.number
     }
 }

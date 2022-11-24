@@ -11,10 +11,7 @@ internal object IssueConverter {
             number = fragment.number,
             title = fragment.title,
             assignee = fragment.assignees.nodes?.firstOrNull()?.assigneeFragment?.let { assignee ->
-                Assignee(
-                    id = assignee.id,
-                    name = assignee.name
-                )
+                AssigneeConverter.convert(assignee)
             }
         )
     }

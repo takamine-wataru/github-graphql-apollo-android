@@ -5,6 +5,7 @@ import com.example.sample.domain.repository.IssueRepository
 import com.example.sample.infra.ApolloClientFactory
 import com.example.sample.infra.domain.impl.repository.IssueRepositoryImpl
 import com.example.sample.ui.common.viewmodel.IssueItemViewModel
+import com.example.sample.ui.pages.issuedetail.IssueDetailViewModel
 import com.example.sample.ui.pages.issuelist.IssueListViewModel
 import com.example.sample.ui.pages.myissuelist.MyIssueListViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -17,6 +18,9 @@ val appModule = module {
     }
     viewModel {
         MyIssueListViewModel(get())
+    }
+    viewModel {
+        IssueDetailViewModel(get(), get())
     }
     viewModel {
         IssueItemViewModel()
