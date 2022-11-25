@@ -6,6 +6,7 @@ import com.example.sample.domain.repository.IssueRepository
 import com.example.sample.ui.common.bindingmodel.IssueBindingConverter
 import com.example.sample.ui.common.bindingmodel.IssueBindingModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 internal class MyIssueListViewModel(
@@ -17,9 +18,11 @@ internal class MyIssueListViewModel(
 
     init {
         viewModelScope.launch {
-            val issue = repository.fetchRepoAssignIssueList()
-            _issueListStateFlow.value = issue.map {
-                IssueBindingConverter.convert(it)
+            repository.fetchRepoAssignIssueList().collect { result ->
+                println("collect updated assigned issueList")
+                _issueListStateFlow.value = result.map {
+                    IssueBindingConverter.convert(it)
+                }
             }
         }
     }
